@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | {{ owner.name }}{% endblock %}
+
+{% block content %}
+
+<!-- ============================================================
+     PAGE HERO
+     ============================================================ -->
+<section class="page-hero">
+  <div class="section-container">
+    <h1 class="page-hero-title">Get In <span class="accent">Touch</span></h1>
+    <p class="page-hero-sub">I'd love to hear from you</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CONTACT GRID — form (left) + info sidebar (right)
+     ============================================================ -->
+<section class="contact-section">
+  <div class="section-container contact-grid">
+
+    <!-- ───── CONTACT FORM ───── -->
+    <div class="contact-form-wrap">
+      <h2>Send a Message</h2>
+
+      <!-- Success banner (shown after valid POST) -->
+      {% if success %}
+        <div class="success-banner">
+          &#10003; Thanks for reaching out! I'll get back to you soon.
+        </div>
+      {% endif %}
+
+      <!-- Per-field validation errors (errors is a dict keyed by field name) -->
+      {% if errors %}
+        <ul class="error-list">
+          {% for field, msg in errors.items() %}
+            <li>{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <!--
+        action=""  → POSTs to the same URL (/contact)
+        novalidate → disables browser validation so our server errors show
+      -->
+      <form action="" method="POST" class="contact-form" novalidate>
+
+        <div class="form-group">
+          <label for="name">Name <span class="required">*</span></label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Jane Smith"
+            value="{{ form_data.get('name', '') }}"
+            class="{{ 'input-error' if errors.get('name') else '' }}"
+            required
+          />
+          {% if errors.get('name') %}
+            <span class="field-error">{{ errors.name }}</span>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="jane@example.com"
+            value="{{ form_data.get('email', '') }}"
+            class="{{ 'input-error' if errors.get('email') else '' }}"
+            required
+          />
+          {% if errors.get('email') %}
+            <span class="field-error">{{ errors.email }}</span>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message <span class="required">*</span></label>
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            placeholder="Tell me about the role, project, or just say hi!"
+            class="{{ 'input-error' if errors.get('message') else '' }}"
+            required
+          >{{ form_data.get('message', '') }}</textarea>
+          {% if errors.get('message') %}
+            <span class="field-error">{{ errors.message }}</span>
+          {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full">Send Message &rarr;</button>
+
+      </form>
+    </div><!-- /.contact-form-wrap -->
+
+
+    <!-- ───── CONTACT INFO SIDEBAR ───── -->
+    <aside class="contact-info">
+      <h2>Contact Info</h2>
+
+      <ul class="info-list">
+        <li>
+          <span class="info-icon">&#128231;</span>
+          <div>
+            <strong>Email</strong>
+            <a href="mailto:{{ owner.email }}">{{ owner.email }}</a>
+          </div>
+        </li>
+        <li>
+          <span class="info-icon">&#128222;</span>
+          <div>
+            <strong>Phone</strong>
+            <a href="tel:{{ owner.phone }}">{{ owner.phone }}</a>
+          </div>
+        </li>
+        <li>
+          <span class="info-icon">&#128188;</span>
+          <div>
+            <strong>LinkedIn</strong>
+            <a href="{{ social.linkedin }}" target="_blank" rel="noopener">
+              {{ social.linkedin }}
+            </a>
+          </div>
+        </li>
+        <li>
+          <span class="info-icon">&#128025;</span>
+          <div>
+            <strong>GitHub</strong>
+            <a href="{{ social.github }}" target="_blank" rel="noopener">
+              {{ social.github }}
+            </a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="availability-box">
+        <span class="status-dot"></span>
+        <p>Currently <strong>open</strong> to full-time roles and interesting projects.</p>
+      </div>
+    </aside><!-- /.contact-info -->
+
+  </div>
+</section>
+
+{% endblock %}

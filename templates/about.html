@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}About | {{ owner.name }}{% endblock %}
+
+{% block content %}
+
+<!-- ============================================================
+     PAGE HERO
+     ============================================================ -->
+<section class="page-hero">
+  <div class="section-container">
+    <h1 class="page-hero-title">About <span class="accent">Me</span></h1>
+    <p class="page-hero-sub">Background, skills, and experience</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     BIO
+     ============================================================ -->
+<section class="about-bio">
+  <div class="section-container about-bio-inner">
+
+    <!-- Initials avatar (no image file needed) -->
+    <div class="avatar-wrap">
+      <div class="avatar-placeholder" aria-label="Profile initials">
+        {% set parts = owner.name.split() %}
+        <span>{{ parts[0][0] }}{{ parts[-1][0] if parts|length > 1 else '' }}</span>
+      </div>
+    </div>
+
+    <!-- Text + download CTA -->
+    <div class="bio-text">
+      <h2>Hello, I'm <span class="accent">{{ owner.name }}</span></h2>
+      <h3 class="bio-role">{{ owner.role }}</h3>
+      <p>{{ owner.summary }}</p>
+      <p>
+        I enjoy designing resilient, high-throughput backend systems, diving deep into
+        OS and networking internals, and continuously sharpening my engineering craft.
+      </p>
+
+      <!-- /static/resume.pdf — drop your file here when ready -->
+      <a href="{{ url_for('static', filename='resume.pdf') }}"
+         class="btn btn--primary"
+         download
+         target="_blank"
+         rel="noopener">
+        &#11015; Download Resume
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     STRENGTHS / SKILLS
+     ============================================================ -->
+<section class="skills" id="skills">
+  <div class="section-container">
+    <h2 class="section-title">Skills &amp; Strengths</h2>
+    <p class="section-sub">What I bring to the table</p>
+    <div class="skills-grid">
+      {% for skill in skills %}
+        <span class="skill-badge">{{ skill }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     EDUCATION
+     ============================================================ -->
+<section class="education-section" id="education">
+  <div class="section-container">
+    <h2 class="section-title">Education</h2>
+    <p class="section-sub">Academic background</p>
+
+    <div class="edu-cards">
+      {% for edu in education %}
+      <div class="edu-card">
+        <div class="edu-icon">&#127891;</div>
+        <div class="edu-info">
+          <h3 class="edu-school">{{ edu.school }}</h3>
+          <p class="edu-degree">{{ edu.degree }}</p>
+          <div class="edu-meta">
+            <span class="edu-period">{{ edu.period }}</span>
+            {% if edu.gpa %}
+              <span class="edu-gpa">GPA: {{ edu.gpa }}</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     EXPERIENCE HIGHLIGHTS
+     ============================================================ -->
+<section class="experience-section" id="experience">
+  <div class="section-container">
+    <h2 class="section-title">Experience</h2>
+    <p class="section-sub">Where I've worked</p>
+
+    <div class="exp-timeline">
+      {% for job in experience %}
+      <div class="exp-card">
+        <div class="exp-card-header">
+          <div>
+            <h3 class="exp-company">{{ job.company }}</h3>
+            <p class="exp-role">{{ job.role }}</p>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-period">{{ job.period }}</span>
+            <span class="exp-location">{{ job.location }}</span>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          {% for bullet in job.bullets %}
+            <li>{{ bullet }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<section class="cta-section">
+  <div class="section-container cta-inner">
+    <h2>Interested in working together?</h2>
+    <p>I'm open to new opportunities and interesting conversations.</p>
+    <a href="{{ url_for('contact') }}" class="btn btn--primary">Get In Touch</a>
+  </div>
+</section>
+
+{% endblock %}

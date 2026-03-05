@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}{{ owner.name }} | Home{% endblock %}
+
+{% block content %}
+
+<!-- ============================================================
+     1. HERO
+     ============================================================ -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <span class="hero-badge">&#128075; Open to New Opportunities</span>
+    <h1 class="hero-title">Hi, I'm <span class="accent">{{ owner.name }}</span></h1>
+    <h2 class="hero-role">{{ owner.role }}</h2>
+    <p class="hero-intro">{{ owner.summary }}</p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn--primary">View Projects</a>
+      <a href="{{ url_for('contact') }}" class="btn btn--outline">Contact Me</a>
+    </div>
+  </div>
+
+  <!-- Decorative code snippet beside the text -->
+  <div class="hero-code" aria-hidden="true">
+    <pre><code><span class="c-keyword">class</span> <span class="c-class">Engineer</span>:
+    name  = <span class="c-string">"{{ owner.name }}"</span>
+    focus = [<span class="c-string">"Distributed Systems"</span>,
+             <span class="c-string">"Python / C++"</span>,
+             <span class="c-string">"Cloud &amp; Microservices"</span>]
+    cloud = [<span class="c-string">"AWS"</span>, <span class="c-string">"GCP"</span>]
+    tools = [<span class="c-string">"Docker"</span>, <span class="c-string">"Kubernetes"</span>]
+
+    <span class="c-keyword">def</span> <span class="c-fn">build</span>(self):
+        <span class="c-keyword">return</span> <span class="c-string">"Reliable systems at scale"</span></code></pre>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     2. SKILLS
+     ============================================================ -->
+<section class="skills" id="skills">
+  <div class="section-container">
+    <h2 class="section-title">Skills</h2>
+    <p class="section-sub">Technologies I work with</p>
+    <div class="skills-grid">
+      {% for skill in skills %}
+        <span class="skill-badge">{{ skill }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     3. PROJECTS  — data comes from app.py, not hardcoded
+     ============================================================ -->
+<section class="projects" id="projects">
+  <div class="section-container">
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">Things I've built</p>
+
+    <div class="projects-grid">
+      {% for project in projects %}
+      <article class="card">
+        <!-- macOS-style traffic-light dots -->
+        <div class="card-top-bar">
+          <span class="dot dot--red"></span>
+          <span class="dot dot--yellow"></span>
+          <span class="dot dot--green"></span>
+        </div>
+
+        <div class="card-body">
+          <h3 class="card-title">{{ project.title }}</h3>
+          {% if project.subtitle %}
+            <span class="card-subtitle">{{ project.subtitle }}</span>
+          {% endif %}
+          <p class="card-desc">{{ project.description }}</p>
+
+          <!-- Tech chips use project.tech list -->
+          <div class="card-tags">
+            {% for t in project.tech %}
+              <span class="tag">{{ t }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <a href="{{ project.github }}" target="_blank" rel="noopener"
+             class="btn btn--sm btn--outline">
+            View on GitHub &rarr;
+          </a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     4. EXPERIENCE — timeline cards, data from app.py
+     ============================================================ -->
+<section class="experience-section" id="experience">
+  <div class="section-container">
+    <h2 class="section-title">Experience</h2>
+    <p class="section-sub">Where I've worked</p>
+
+    <div class="exp-timeline">
+      {% for job in experience %}
+      <div class="exp-card">
+        <div class="exp-card-header">
+          <div>
+            <h3 class="exp-company">{{ job.company }}</h3>
+            <p class="exp-role">{{ job.role }}</p>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-period">{{ job.period }}</span>
+            <span class="exp-location">{{ job.location }}</span>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          {% for bullet in job.bullets %}
+            <li>{{ bullet }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     5. EDUCATION
+     ============================================================ -->
+<section class="education-section" id="education">
+  <div class="section-container">
+    <h2 class="section-title">Education</h2>
+    <p class="section-sub">Academic background</p>
+
+    <div class="edu-cards">
+      {% for edu in education %}
+      <div class="edu-card">
+        <div class="edu-icon">&#127891;</div>
+        <div class="edu-info">
+          <h3 class="edu-school">{{ edu.school }}</h3>
+          <p class="edu-degree">{{ edu.degree }}</p>
+          <div class="edu-meta">
+            <span class="edu-period">{{ edu.period }}</span>
+            {% if edu.gpa %}
+              <span class="edu-gpa">GPA: {{ edu.gpa }}</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
