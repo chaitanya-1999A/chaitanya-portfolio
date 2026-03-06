@@ -64,10 +64,12 @@ PROJECTS = [
         "title":    "AWS Data Platform Monitoring Pack",
         "subtitle": "Platform / DevOps Project",
         "description": (
-            "Monitoring pack to track job health, data freshness, and storage growth "
-            "using AWS metrics and logs. Published custom metrics from Python checks; "
-            "configured CloudWatch alarms across 30+ scheduled jobs. Built Grafana "
-            "dashboards to speed triage and surface reliability and cost signals."
+            "Built a monitoring pack for a cloud data platform to track job health, "
+            "data freshness, and storage growth using AWS-native metrics and logs. "
+            "Published custom metrics from Python checks and configured CloudWatch "
+            "alarms for failures and latency across 30+ scheduled jobs. "
+            "Added Grafana dashboards to speed up triage and highlight reliability "
+            "and cost signals for data platform owners."
         ),
         "tech":   ["AWS CloudWatch", "Python", "S3", "Grafana"],
         "github": "https://github.com/<your-username>/aws-data-platform-monitoring-pack",
@@ -76,10 +78,12 @@ PROJECTS = [
         "title":    "IaC Bootstrap for Multi-Environment AWS Setup",
         "subtitle": "Infrastructure as Code Project",
         "description": (
-            "IaC blueprint to provision a secure AWS baseline for dev/stage environments "
-            "for data engineers. Codified IAM roles/policies, EC2 templates, and logging "
-            "defaults with Git-reviewed changes. Automated validation checks to reduce "
-            "misconfigurations and improve consistency."
+            "Created an Infrastructure-as-Code blueprint to provision a secure AWS "
+            "baseline for dev/stage environments used by data engineers. "
+            "Codified IAM roles/policies, EC2 templates, and logging defaults, enabling "
+            "repeatable rollouts through Git-reviewed changes. "
+            "Validated deployments with automated checks to reduce misconfigurations "
+            "and improve consistency across environments."
         ),
         "tech":   ["Terraform", "AWS CloudFormation", "EC2", "IAM", "Git"],
         "github": "https://github.com/<your-username>/iac-bootstrap-multi-env-aws",
@@ -93,10 +97,10 @@ EXPERIENCE = [
         "location": "India",
         "period":   "Jan 2023 – Dec 2023",
         "bullets": [
-            "Designed and maintained AWS infrastructure for analytics workloads using EC2, S3, IAM, and CloudWatch across multiple environments",
-            "Automated provisioning with Terraform and CloudFormation; reduced setup time from days to a few hours",
-            "Implemented CloudWatch alarms and log metrics to improve incident visibility and reduce time to detect recurring issues",
-            "Improved PostgreSQL reporting reliability by tuning queries and indexing; improved p95 latency by ~15%",
+            "Designed and maintained AWS infrastructure for analytics workloads using EC2, S3, IAM, and CloudWatch, supporting multiple environments with consistent baselines.",
+            "Automated provisioning using Terraform and AWS CloudFormation, reducing environment setup time from days to a few hours and improving repeatability.",
+            "Implemented monitoring and alerting with CloudWatch alarms and log metrics, improving incident visibility and reducing time to detect recurring issues.",
+            "Strengthened reliability of PostgreSQL reporting by tuning queries and indexing for high-use dashboards, improving p95 query latency by 15% on representative workloads.",
         ],
     },
     {
@@ -105,20 +109,20 @@ EXPERIENCE = [
         "location": "India",
         "period":   "Jan 2022 – Dec 2022",
         "bullets": [
-            "Built Python automation for operational checks (health validation, backup verification); reduced manual toil 6–8 hrs/week",
-            "Maintained MySQL/PostgreSQL services; supported schema changes and integrity checks",
-            "Containerized services with Docker; supported Kubernetes deployment patterns",
-            "Created dashboards and alerts with Prometheus, Grafana, and Datadog to improve on-call observability",
+            "Developed automation scripts in Python to standardize operational checks (health validation, backup verification), reducing manual toil by 6–8 hours per week.",
+            "Maintained relational SQL services using MySQL and PostgreSQL, supporting schema changes and data integrity checks for analytics-facing queries.",
+            "Containerized internal services with Docker and supported orchestration patterns in Kubernetes for consistent deployments across environments.",
+            "Created dashboards and alerts using Prometheus and Grafana (and team-standard tools like Datadog) to improve observability for on-call ownership.",
         ],
     },
 ]
 
 EDUCATION = [
     {
-        "school": "California State University, East Bay",
-        "degree": "Master's in Computer Science",
-        "gpa":    "3.7",
-        "period": "Jan 2024 – Dec 2025",
+        "school":   "California State University, East Bay",
+        "degree":   "Master's in Computer Science",
+        "location": "Hayward, CA",
+        "period":   "Jan 2024 – Dec 2025",
     }
 ]
 
