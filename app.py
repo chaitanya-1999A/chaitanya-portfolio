@@ -2,14 +2,12 @@
 Flask Portfolio Website — Chaitanya Annabathana
 ------------------------------------------------
 Run:
-    python -m venv venv
-    source venv/bin/activate   # Windows: venv\\Scripts\\activate
-    pip install -r requirements.txt
+    source .venv/bin/activate
     python app.py
-Then open http://127.0.0.1:5000
+Then open http://127.0.0.1:8080
 """
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -18,91 +16,99 @@ app = Flask(__name__)
 # ─────────────────────────────────────────────────────────────────────────────
 
 OWNER = {
-    "name": "Chaitanya Annabathana",
-    "role": "Software Engineer | Distributed Systems | Backend (Python/C++)",
+    "name":  "Chaitanya Annabathana",
+    "role":  "Platform / DevOps Engineer | AWS | IaC | Reliability | Python Automation",
     "email": "annabathanachaitanya1999@gmail.com",
     "phone": "(475) 345-2920",
     "summary": (
-        "Software Engineer with 3+ years of experience building and supporting "
-        "cloud-based distributed systems in production. Strong foundation in "
-        "Python and C++, backend services and microservices, AWS/GCP, "
-        "Docker/Kubernetes. Comfortable owning features end-to-end, "
-        "troubleshooting production issues, and delivering reliable, "
-        "high-performance systems."
+        "Platform/DevOps Engineer with 2+ years of experience designing and operating "
+        "AWS infrastructure for data storage, processing, and reporting. "
+        "Delivered Infrastructure-as-Code and automation that improved deployment "
+        "consistency and reduced operational toil. Hands-on with AWS (EC2, S3, "
+        "CloudWatch, IAM), SQL databases, and developer tooling in Python. Known for "
+        "partnering with Security and IT to build reliable, scalable, cost-effective "
+        "data platforms."
     ),
 }
 
-SKILLS = [
-    # Languages
-    "Python", "Go", "C++", "Scala",
-    # Core CS
-    "Distributed Systems Design", "Concurrency", "Networking", "Operating Systems",
-    # Cloud
-    "AWS", "Google Cloud Platform (GCP)", "Microsoft Azure",
-    # Infra / DevOps
-    "Docker", "Kubernetes", "Microservices Architecture",
-    # Engineering
-    "System Design", "REST APIs", "Performance Optimization", "Scalability",
-    # Tooling
-    "Git", "CI/CD", "Monitoring", "Debugging", "Linux",
+# Skills grouped by category — rendered as labeled chip groups in the UI
+SKILL_GROUPS = [
+    {
+        "label":  "Cloud (AWS)",
+        "skills": ["EC2", "S3", "CloudWatch", "IAM", "RDS"],
+    },
+    {
+        "label":  "Infrastructure as Code",
+        "skills": ["Terraform", "AWS CloudFormation"],
+    },
+    {
+        "label":  "Programming",
+        "skills": ["Python", "Bash"],
+    },
+    {
+        "label":  "Databases",
+        "skills": ["PostgreSQL", "MySQL", "SQL"],
+    },
+    {
+        "label":  "Containers",
+        "skills": ["Docker", "Kubernetes"],
+    },
+    {
+        "label":  "Monitoring & Dev Tools",
+        "skills": ["Prometheus", "Grafana", "Datadog", "Git"],
+    },
 ]
 
 PROJECTS = [
     {
-        "title": "Cloud File Management System",
-        "subtitle": "Learning Project",
+        "title":    "AWS Data Platform Monitoring Pack",
+        "subtitle": "Platform / DevOps Project",
         "description": (
-            "Simulates cloud file upload, storage, and retrieval. "
-            "REST APIs for upload/download/metadata in Python. "
-            "Deployed on AWS, containerized with Docker. "
-            "Includes logging/monitoring and concurrency testing."
+            "Monitoring pack to track job health, data freshness, and storage growth "
+            "using AWS metrics and logs. Published custom metrics from Python checks; "
+            "configured CloudWatch alarms across 30+ scheduled jobs. Built Grafana "
+            "dashboards to speed triage and surface reliability and cost signals."
         ),
-        "tech": ["Python", "AWS", "Docker", "REST APIs", "Git"],
-        "github": "https://github.com/<your-username>/cloud-file-management",
+        "tech":   ["AWS CloudWatch", "Python", "S3", "Grafana"],
+        "github": "https://github.com/<your-username>/aws-data-platform-monitoring-pack",
     },
     {
-        "title": "Distributed Log Aggregation System",
-        "subtitle": "Learning Project",
+        "title":    "IaC Bootstrap for Multi-Environment AWS Setup",
+        "subtitle": "Infrastructure as Code Project",
         "description": (
-            "Simulates log collection and analysis from multiple services. "
-            "Microservices design with producers/consumers. "
-            "Python services to process and aggregate logs. "
-            "Parallel processing and performance testing."
+            "IaC blueprint to provision a secure AWS baseline for dev/stage environments "
+            "for data engineers. Codified IAM roles/policies, EC2 templates, and logging "
+            "defaults with Git-reviewed changes. Automated validation checks to reduce "
+            "misconfigurations and improve consistency."
         ),
-        "tech": ["Python", "Linux", "Microservices", "Git"],
-        "github": "https://github.com/<your-username>/distributed-log-aggregation",
+        "tech":   ["Terraform", "AWS CloudFormation", "EC2", "IAM", "Git"],
+        "github": "https://github.com/<your-username>/iac-bootstrap-multi-env-aws",
     },
 ]
 
 EXPERIENCE = [
     {
-        "company": "OSI Digital",
-        "role": "Software Engineer",
-        "location": "Hyderabad, India",
-        "period": "Jan 2023 – Dec 2023",
+        "company":  "OSI Digital",
+        "role":     "Platform Engineer",
+        "location": "India",
+        "period":   "Jan 2023 – Dec 2023",
         "bullets": [
-            "Built backend services using Python and C++ in microservices architecture",
-            "Designed distributed systems handling large volumes of application data",
-            "Cloud deployments on AWS with Docker containerization and Kubernetes orchestration",
-            "Developed REST APIs for service-to-service communication",
-            "Profiled and optimized performance and scalability bottlenecks",
-            "Linux debugging using OS, networking, and concurrency fundamentals",
-            "Set up monitoring and logging pipelines for customer issue resolution",
-            "Maintained CI/CD workflows using Git and Jenkins",
+            "Designed and maintained AWS infrastructure for analytics workloads using EC2, S3, IAM, and CloudWatch across multiple environments",
+            "Automated provisioning with Terraform and CloudFormation; reduced setup time from days to a few hours",
+            "Implemented CloudWatch alarms and log metrics to improve incident visibility and reduce time to detect recurring issues",
+            "Improved PostgreSQL reporting reliability by tuning queries and indexing; improved p95 latency by ~15%",
         ],
     },
     {
-        "company": "Synopsys",
-        "role": "Systems / Software Support Engineer",
-        "location": "Hyderabad, India",
-        "period": "Jan 2021 – Dec 2022",
+        "company":  "Synopsys",
+        "role":     "DevOps / Reliability Engineer",
+        "location": "India",
+        "period":   "Jan 2022 – Dec 2022",
         "bullets": [
-            "Supported large-scale distributed backend systems in enterprise environments",
-            "Linux troubleshooting using OS fundamentals",
-            "Debugged networking and concurrency issues in production",
-            "Assisted with cloud infrastructure setup on AWS/GCP",
-            "Managed Docker deployments and Kubernetes clusters",
-            "Maintained CI/CD workflows and monitored production systems",
+            "Built Python automation for operational checks (health validation, backup verification); reduced manual toil 6–8 hrs/week",
+            "Maintained MySQL/PostgreSQL services; supported schema changes and integrity checks",
+            "Containerized services with Docker; supported Kubernetes deployment patterns",
+            "Created dashboards and alerts with Prometheus, Grafana, and Datadog to improve on-call observability",
         ],
     },
 ]
@@ -111,15 +117,15 @@ EDUCATION = [
     {
         "school": "California State University, East Bay",
         "degree": "Master's in Computer Science",
-        "gpa": "3.7",
+        "gpa":    "3.7",
         "period": "Jan 2024 – Dec 2025",
     }
 ]
 
 SOCIAL = {
-    "github": "https://github.com/<your-username>",
-    "linkedin": "https://linkedin.com/in/<your-profile>",
-    "portfolio": "",   # add your blog/portfolio URL here if you have one
+    "github":    "https://github.com/<your-username>",
+    "linkedin":  "https://linkedin.com/in/<your-profile>",
+    "portfolio": "",
 }
 
 
@@ -129,11 +135,10 @@ SOCIAL = {
 
 @app.route("/")
 def index():
-    """Home page — hero, skills, projects, experience, education, footer."""
     return render_template(
         "index.html",
         owner=OWNER,
-        skills=SKILLS,
+        skill_groups=SKILL_GROUPS,
         projects=PROJECTS,
         experience=EXPERIENCE,
         education=EDUCATION,
@@ -143,11 +148,10 @@ def index():
 
 @app.route("/about")
 def about():
-    """About page — bio, strengths, education, experience highlights, resume."""
     return render_template(
         "about.html",
         owner=OWNER,
-        skills=SKILLS,
+        skill_groups=SKILL_GROUPS,
         experience=EXPERIENCE,
         education=EDUCATION,
         social=SOCIAL,
@@ -156,18 +160,16 @@ def about():
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
-    """Contact page — form with basic validation; success message on same page."""
-    errors = {}
-    success = False
+    errors    = {}
+    success   = False
     form_data = {}
 
     if request.method == "POST":
-        name    = request.form.get("name", "").strip()
-        email   = request.form.get("email", "").strip()
+        name    = request.form.get("name",    "").strip()
+        email   = request.form.get("email",   "").strip()
         message = request.form.get("message", "").strip()
         form_data = {"name": name, "email": email, "message": message}
 
-        # Basic validation
         if not name or len(name) < 2:
             errors["name"] = "Please enter your name (at least 2 characters)."
         if not email or "@" not in email or "." not in email.split("@")[-1]:
@@ -176,8 +178,8 @@ def contact():
             errors["message"] = "Message must be at least 10 characters."
 
         if not errors:
-            success = True
-            form_data = {}   # clear form fields on success
+            success   = True
+            form_data = {}
 
     return render_template(
         "contact.html",
@@ -195,6 +197,6 @@ if __name__ == "__main__":
     import os
     # PORT env var is set by Render/Railway in production.
     # Fallback to 8080 locally (5000 is grabbed by macOS AirPlay Receiver).
-    port = int(os.environ.get("PORT", 8080))
+    port  = int(os.environ.get("PORT", 8080))
     debug = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
     app.run(host="0.0.0.0", port=port, debug=debug)

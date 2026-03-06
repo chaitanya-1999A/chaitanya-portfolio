@@ -35,11 +35,12 @@
       <h3 class="bio-role">{{ owner.role }}</h3>
       <p>{{ owner.summary }}</p>
       <p>
-        I enjoy designing resilient, high-throughput backend systems, diving deep into
-        OS and networking internals, and continuously sharpening my engineering craft.
+        I enjoy building systems that are observable, reproducible, and easy to hand
+        off — cloud infrastructure that teams can trust and automation that removes
+        repetitive toil for good.
       </p>
 
-      <!-- /static/resume.pdf — drop your file here when ready -->
+      <!-- Drop your actual PDF at static/resume.pdf when ready -->
       <a href="{{ url_for('static', filename='resume.pdf') }}"
          class="btn btn--primary"
          download
@@ -54,17 +55,26 @@
 
 
 <!-- ============================================================
-     STRENGTHS / SKILLS
+     SKILLS & STRENGTHS  — grouped by category, data from app.py
      ============================================================ -->
 <section class="skills" id="skills">
   <div class="section-container">
     <h2 class="section-title">Skills &amp; Strengths</h2>
     <p class="section-sub">What I bring to the table</p>
-    <div class="skills-grid">
-      {% for skill in skills %}
-        <span class="skill-badge">{{ skill }}</span>
+
+    <div class="skill-groups-grid">
+      {% for group in skill_groups %}
+      <div class="skill-group">
+        <h4 class="skill-group-label">{{ group.label }}</h4>
+        <div class="skill-chips">
+          {% for item in group.skills %}
+            <span class="skill-badge">{{ item }}</span>
+          {% endfor %}
+        </div>
+      </div>
       {% endfor %}
     </div>
+
   </div>
 </section>
 

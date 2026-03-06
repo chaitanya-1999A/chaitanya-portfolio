@@ -19,40 +19,47 @@
     </div>
   </div>
 
-  <!-- Decorative code snippet beside the text -->
+  <!-- Decorative code snippet — updated to reflect DevOps / Platform focus -->
   <div class="hero-code" aria-hidden="true">
-    <pre><code><span class="c-keyword">class</span> <span class="c-class">Engineer</span>:
+    <pre><code><span class="c-keyword">class</span> <span class="c-class">PlatformEngineer</span>:
     name  = <span class="c-string">"{{ owner.name }}"</span>
-    focus = [<span class="c-string">"Distributed Systems"</span>,
-             <span class="c-string">"Python / C++"</span>,
-             <span class="c-string">"Cloud &amp; Microservices"</span>]
-    cloud = [<span class="c-string">"AWS"</span>, <span class="c-string">"GCP"</span>]
-    tools = [<span class="c-string">"Docker"</span>, <span class="c-string">"Kubernetes"</span>]
+    cloud = [<span class="c-string">"EC2"</span>, <span class="c-string">"S3"</span>, <span class="c-string">"CloudWatch"</span>, <span class="c-string">"IAM"</span>]
+    iac   = [<span class="c-string">"Terraform"</span>, <span class="c-string">"CloudFormation"</span>]
+    obs   = [<span class="c-string">"Prometheus"</span>, <span class="c-string">"Grafana"</span>]
 
-    <span class="c-keyword">def</span> <span class="c-fn">build</span>(self):
-        <span class="c-keyword">return</span> <span class="c-string">"Reliable systems at scale"</span></code></pre>
+    <span class="c-keyword">def</span> <span class="c-fn">deploy</span>(self):
+        <span class="c-keyword">return</span> <span class="c-string">"Reliable infra, zero manual steps"</span></code></pre>
   </div>
 </section>
 
 
 <!-- ============================================================
-     2. SKILLS
+     2. SKILLS  — grouped by category, data from app.py
      ============================================================ -->
 <section class="skills" id="skills">
   <div class="section-container">
     <h2 class="section-title">Skills</h2>
     <p class="section-sub">Technologies I work with</p>
-    <div class="skills-grid">
-      {% for skill in skills %}
-        <span class="skill-badge">{{ skill }}</span>
+
+    <div class="skill-groups-grid">
+      {% for group in skill_groups %}
+      <div class="skill-group">
+        <h4 class="skill-group-label">{{ group.label }}</h4>
+        <div class="skill-chips">
+          {% for item in group.skills %}
+            <span class="skill-badge">{{ item }}</span>
+          {% endfor %}
+        </div>
+      </div>
       {% endfor %}
     </div>
+
   </div>
 </section>
 
 
 <!-- ============================================================
-     3. PROJECTS  — data comes from app.py, not hardcoded
+     3. PROJECTS  — data from app.py, not hardcoded
      ============================================================ -->
 <section class="projects" id="projects">
   <div class="section-container">
@@ -62,7 +69,6 @@
     <div class="projects-grid">
       {% for project in projects %}
       <article class="card">
-        <!-- macOS-style traffic-light dots -->
         <div class="card-top-bar">
           <span class="dot dot--red"></span>
           <span class="dot dot--yellow"></span>
@@ -76,7 +82,6 @@
           {% endif %}
           <p class="card-desc">{{ project.description }}</p>
 
-          <!-- Tech chips use project.tech list -->
           <div class="card-tags">
             {% for t in project.tech %}
               <span class="tag">{{ t }}</span>
@@ -99,7 +104,7 @@
 
 
 <!-- ============================================================
-     4. EXPERIENCE — timeline cards, data from app.py
+     4. EXPERIENCE  — timeline cards, data from app.py
      ============================================================ -->
 <section class="experience-section" id="experience">
   <div class="section-container">
